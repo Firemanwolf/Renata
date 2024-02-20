@@ -6,6 +6,7 @@ using UnityEngine;
 public class BulletData : ScriptableObject
 {
     [Header("Stats")]
+    [SerializeField] protected string bulletName;
     [SerializeField] protected float life;
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
@@ -22,5 +23,10 @@ public class BulletData : ScriptableObject
                 return damage;
         }
         return 0;
+    }
+
+    public virtual string GetName()
+    {
+        return bulletName;
     }
 }

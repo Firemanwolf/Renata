@@ -12,11 +12,26 @@ public class PlayerBulletPivot: MonoBehaviour
     private BulletController loadedBullet;
     private float coolDown;
 
+    public static PlayerBulletPivot instance { get; private set; }
+
     [Header("Main Camera")]
     [SerializeField] private Camera m_camera;
 
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Update()
     {
+        if (GameManager.instance.gameState != GameState.Combat) return;
         Vector3 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         RotateBullet(mousePos);
         if (coolDown <= 0)
@@ -24,6 +39,11 @@ public class PlayerBulletPivot: MonoBehaviour
             Fire();
         }
         else coolDown -= Time.deltaTime;
+    }
+
+    public void LoadBullet(AllyBulletData bulletData)
+    {
+        bulletPrefab.data = bulletData;
     }
 
     void Fire()

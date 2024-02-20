@@ -30,15 +30,21 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (health < 0) Destroy(this.gameObject);
-        Movement();
+        if(GameManager.instance.gameState == GameState.Combat)
+        {
+            if (health < 0) Destroy(this.gameObject);
+            Movement();
+        }
     }
 
     void FixedUpdate()
     {
-        Vector2 position = rb.position;
-        position += velocity * Time.fixedDeltaTime;
-        rb.MovePosition(position);
+        if(GameManager.instance.gameState == GameState.Combat)
+        {
+            Vector2 position = rb.position;
+            position += velocity * Time.fixedDeltaTime;
+            rb.MovePosition(position);
+        }
     }
 
     public void MassIncrement(float itemMass)

@@ -8,5 +8,5 @@ public enum BulletStat
     Speed,
     Damage,
     ReloadRate,
-    Mass
+    Mass,
 }
