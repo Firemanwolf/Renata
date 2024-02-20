@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float detectRadius;
 
+    [SerializeField] private Animator anim;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -59,7 +61,10 @@ public class PlayerController : MonoBehaviour
         float yInputAxis = Input.GetAxis("Vertical");
         velocity.x = Mathf.MoveTowards(velocity.x, xInputAxis * moveSpeed/mass, moveSpeed * Time.deltaTime/delay);
         velocity.y = Mathf.MoveTowards(velocity.y, yInputAxis * moveSpeed/mass, moveSpeed * Time.deltaTime/delay);
-        
+        anim.SetBool("IsWalkingX", Mathf.Abs(xInputAxis) > 0.1);
+        anim.SetBool("IsWalkingY", Mathf.Abs(yInputAxis) > 0.1);
+        anim.SetFloat("VelocityX", velocity.x);
+        anim.SetFloat("VelocityY", velocity.y);
         if (Physics2D.CircleCast(transform.position,0.25f,(Vector2.right*velocity.x).normalized, circleCollider.bounds.extents.x, targetlayer))
         {
             velocity.x = 0;        

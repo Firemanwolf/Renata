@@ -10,6 +10,7 @@ public class BulletData : ScriptableObject
     [SerializeField] protected float life;
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
+    [SerializeField] protected Sprite bulletArt;
 
     public virtual float GetStat(BulletStat bulletStat )
     {
@@ -28,5 +29,10 @@ public class BulletData : ScriptableObject
     public virtual string GetName()
     {
         return bulletName;
+    }
+
+    public virtual Sprite GetImage()
+    {
+        return bulletArt;
     }
 }

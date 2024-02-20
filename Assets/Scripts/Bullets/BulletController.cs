@@ -8,6 +8,22 @@ public class BulletController : MonoBehaviour
     protected float timer;
     [SerializeField]protected bool Destroyable;
     private Rigidbody2D rb;
+    public Sprite sprite;
+
+    private void Awake()
+    {
+        sprite = GetComponent<Sprite>();
+    }
+
+    private void Start()
+    {
+        Init();
+    }
+
+    protected virtual void Init()
+    {
+        sprite = data.GetImage();
+    }
 
     public virtual void Fire()
     { 
