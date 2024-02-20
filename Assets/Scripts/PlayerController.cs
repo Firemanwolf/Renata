@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
     public void MassIncrement(float itemMass)
     {
-        mass += itemMass*.1f;
+        mass += itemMass;
     }
 
     void Movement()
@@ -51,9 +51,9 @@ public class PlayerController : MonoBehaviour
         LayerMask targetlayer = LayerMask.GetMask("Wall");
         float xInputAxis = Input.GetAxis("Horizontal");
         float yInputAxis = Input.GetAxis("Vertical");
-        velocity.x = Mathf.MoveTowards(velocity.x, xInputAxis * moveSpeed, moveSpeed * Time.deltaTime/delay);
-        velocity.y = Mathf.MoveTowards(velocity.y, yInputAxis * moveSpeed, moveSpeed * Time.deltaTime/delay);
-        velocity /= mass;
+        velocity.x = Mathf.MoveTowards(velocity.x, xInputAxis * moveSpeed/mass, moveSpeed * Time.deltaTime/delay);
+        velocity.y = Mathf.MoveTowards(velocity.y, yInputAxis * moveSpeed/mass, moveSpeed * Time.deltaTime/delay);
+        
         if (Physics2D.CircleCast(transform.position,0.25f,(Vector2.right*velocity.x).normalized, circleCollider.bounds.extents.x, targetlayer))
         {
             velocity.x = 0;        

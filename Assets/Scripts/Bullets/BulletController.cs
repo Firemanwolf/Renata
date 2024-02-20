@@ -9,19 +9,18 @@ public class BulletController : MonoBehaviour
     [SerializeField]protected bool Destroyable;
     private Rigidbody2D rb;
 
-    protected virtual void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
-
     public virtual void Fire()
-    {
+    { 
         StartCoroutine(Shoot());
     }
 
     protected virtual IEnumerator Shoot()
     {
+        yield return new WaitForFixedUpdate();
         transform.parent = null;
+        rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.angularDrag = 0;
+        rb.gravityScale = 0;
         while (timer < data.GetStat(BulletStat.Life))
         {
             timer += Time.fixedDeltaTime;
@@ -31,5 +30,13 @@ public class BulletController : MonoBehaviour
             yield return null;
         }
         if (Destroyable) Destroy(this.gameObject);
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(Destroyable && collision.gameObject.layer == 6)
+        {
+            Destroy(gameObject);
+        }
     }
 }
