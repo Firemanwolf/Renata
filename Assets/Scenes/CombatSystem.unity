@@ -492,7 +492,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.597516, y: 1.628446, z: -10}
+  m_LocalPosition: {x: -23.2, y: 1.628446, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -563,14 +563,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotGun:
-    attackRange: 0
-    fireRate: 0
+    attackRange: 5
+    fireRate: 2
     bulletPrefab: {fileID: 0}
+    attackTime: 0
   machineGun:
-    attackRange: 0
-    fireRate: 0
-    bulletPrefab: {fileID: 0}
-  firePosition: {fileID: 0}
+    attackRange: 8
+    fireRate: 0.5
+    bulletPrefab: {fileID: 4018592179360662229, guid: 28f99388a222ddc4db1764dd552eb606, type: 3}
+    attackTime: 10
+  firePosition: {fileID: 2049681780}
+  currentState: 2
 --- !u!212 &614492918
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -632,10 +635,11 @@ Transform:
   m_GameObject: {fileID: 614492916}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.546355, y: -16.63747, z: 0}
+  m_LocalPosition: {x: -11.9, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2049681780}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &626533925
@@ -1553,7 +1557,7 @@ Transform:
   m_GameObject: {fileID: 1392503574}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.597516, y: 1.628446, z: 0}
+  m_LocalPosition: {x: -23.2, y: 1.628446, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1652,7 +1656,7 @@ Transform:
   m_GameObject: {fileID: 1550400582}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.11, y: 0, z: 0.01210217}
+  m_LocalPosition: {x: 1.17, y: 0, z: 0.01210217}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1760,7 +1764,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1550400583}
@@ -2225,6 +2229,37 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &2049681779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2049681780}
+  m_Layer: 0
+  m_Name: FirePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2049681780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049681779}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.81, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 614492919}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2054298825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2290,7 +2325,7 @@ Transform:
   m_GameObject: {fileID: 2054298825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.597516, y: 1.628446, z: -10}
+  m_LocalPosition: {x: -23.2, y: 1.628446, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

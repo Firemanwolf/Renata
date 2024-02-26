@@ -19,7 +19,6 @@ public class BulletButton : MonoBehaviour
     public void SetData(AllyBulletData data)
     {
         bulletData = data;
-        Debug.Log(text);
         text.text = "* " + data.GetName();
         button.onClick.AddListener(OnBulletButton);
     }

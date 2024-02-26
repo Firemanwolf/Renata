@@ -11,7 +11,8 @@ public class EnemyController : MonoBehaviour
     {
         Idle,
         Shotgun,
-        Machinegun
+        Machinegun,
+        Attacking
     }
 
     [Serializable]
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         [SerializeField] public float attackRange;
         [SerializeField] public float fireRate;
         [SerializeField] public BulletController bulletPrefab;
+        [SerializeField] public int attackTime;
     }
     [SerializeField] AttackStats shotGun;
     [SerializeField] AttackStats machineGun;
@@ -28,9 +30,11 @@ public class EnemyController : MonoBehaviour
     Transform weakPoint;
     [SerializeField] Transform firePosition;
 
-    AttackState currentState = AttackState.Idle;
+    [SerializeField]AttackState currentState;
 
     float currentTimer;
+    int currentAttackTimes;
+    private AttackStats currentStats;
    
 
     private void Start()
@@ -41,7 +45,6 @@ public class EnemyController : MonoBehaviour
     private void FixedUpdate()
     {
         if (GameManager.instance.gameState != GameState.Combat) return;
-        AttackStats currentStats = new AttackStats();
         switch (currentState)
         {
             case AttackState.Shotgun:
@@ -49,25 +52,39 @@ public class EnemyController : MonoBehaviour
                 goto default;
             case AttackState.Machinegun:
                 currentStats = machineGun;
-                transform.Rotate(Vector3.forward);
                 goto default;
             default:
-                if (!Physics2D.OverlapCircle(transform.position, currentStats.attackRange, 7)) return;
-                if (currentTimer < 0)
-                {
-                    currentTimer = currentStats.fireRate;
-                    BulletController bullet = Instantiate<BulletController>(currentStats.bulletPrefab, firePosition.position, Quaternion.identity);
-                    bullet?.Fire();
-                }
-                else
-                {
-                    currentTimer -= Time.deltaTime;
-                }
+                currentAttackTimes = currentStats.attackTime;
+                currentState = AttackState.Attacking;
                 break;
             case AttackState.Idle:
+                return;
+            case AttackState.Attacking:
                 break;
         }
-        
+
+        if (currentState != AttackState.Attacking&&!Physics2D.OverlapCircle(transform.position, currentStats.attackRange, 7)) return;
+        if (currentAttackTimes <= 0) GameManager.instance.ChangeGameState(GameState.Start);
+        if (currentTimer < 0)
+        {
+            transform.Rotate(Vector3.forward*30);
+            currentTimer = currentStats.fireRate;
+            BulletController bullet = Instantiate<BulletController>(currentStats.bulletPrefab, firePosition.position, Quaternion.identity, firePosition.transform);
+            bullet.transform.rotation = transform.rotation;
+            bullet?.Fire();
+            currentAttackTimes--;
+            Debug.Log(currentAttackTimes);
+        }
+        else
+        {
+            currentTimer -= Time.deltaTime;
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, 5);
     }
 
 }
