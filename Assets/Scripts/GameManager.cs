@@ -5,7 +5,7 @@ using UnityEngine;
 public enum GameState {Start,Selection,Combat,Win,Lost }
 public class GameManager : MonoBehaviour
 {
-    public GameState gameState;
+    public GameState gameState { get; private set; }
     public static GameManager instance { get; private set; }
 
     private void Awake()
@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void ChangeGameState(GameState newState)
+    {
+        gameState = newState;
     }
 
     // Update is called once per frame

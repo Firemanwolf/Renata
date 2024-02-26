@@ -15,7 +15,7 @@ public class TurnBasedManager : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.instance.gameState = GameState.Start;
+        GameManager.instance.ChangeGameState(GameState.Start);
     }
 
     public void OnAttackButton()
@@ -25,8 +25,8 @@ public class TurnBasedManager : MonoBehaviour
         {
             BulletButton btn = Instantiate<BulletButton>(BulletButtonPrefab, itemGroup);
             btn.SetData(bullet);
-            btn.button.onClick.AddListener(() =>{ TurnBasedSystem.SetActive(false); GameManager.instance.gameState = GameState.Combat; });
+            btn.button.onClick.AddListener(() => { TurnBasedSystem.SetActive(false); GameManager.instance.ChangeGameState(GameState.Combat); });
         }
-        GameManager.instance.gameState = GameState.Selection;
+        GameManager.instance.ChangeGameState(GameState.Selection);
     }
 }
