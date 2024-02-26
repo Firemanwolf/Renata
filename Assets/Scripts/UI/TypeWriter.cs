@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TypeWriter : MonoBehaviour
 {
     [SerializeField] private float typewriterSpeed = 50f;
     public bool textfinished;
     public bool canceltyping;
+
+    public bool finishedTyping;
 
     public static TypeWriter instance { get; private set; }
 
@@ -37,6 +40,32 @@ public class TypeWriter : MonoBehaviour
             canceltyping = !canceltyping;
         }
     }
+
+    public void ShowDialogue(DialogueObject dialogueObject, TextMeshProUGUI dialogueBox)
+    {
+
+        dialogueBox.gameObject.SetActive(true);
+        finishedTyping = false;
+        StartCoroutine(StepThroughDialogue(dialogueObject,dialogueBox));
+    }
+
+    private  IEnumerator StepThroughDialogue(DialogueObject dilaogueObject,TextMeshProUGUI textLabel)
+    {
+        for (int i = 0; i < dilaogueObject.dialogueText.Length; i++)
+        {
+            string dialogue = dilaogueObject.dialogueText[i];
+            yield return Run(dialogue, textLabel);
+            yield return new WaitForSeconds(0.2f);
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space) && textfinished);
+            if (i == dilaogueObject.dialogueText.Length - 1) 
+            {
+                finishedTyping = true;
+                break;
+            }
+        }
+    }
+
+
 
     public Coroutine Run(string textToType, TextMeshProUGUI textLabel)
     {

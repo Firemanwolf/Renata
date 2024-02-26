@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Dialogue/DialogueObject")]
 public class DialogueObject : ScriptableObject
 {
-    [SerializeField] private string[] dialogueText;
+    public string[] dialogueText;
 
 }

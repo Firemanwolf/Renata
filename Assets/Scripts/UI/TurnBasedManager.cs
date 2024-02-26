@@ -10,6 +10,7 @@ public class TurnBasedManager : MonoBehaviour
     [SerializeField] GameObject TurnBasedSystem;
     [SerializeField] AllyBulletData[] playerBulletsTypes;
     [SerializeField] BulletButton BulletButtonPrefab;
+    [SerializeField] DialogueObject dialogue;
 
     [SerializeField] Transform itemGroup;
 
@@ -18,8 +19,15 @@ public class TurnBasedManager : MonoBehaviour
         GameManager.instance.ChangeGameState(GameState.Start);
     }
 
+    private void Update()
+    {
+        if (TypeWriter.instance.finishedTyping) { TurnBasedSystem.SetActive(false); GameManager.instance.ChangeGameState(GameState.Combat); }
+    }
+
     public void OnAttackButton()
     {
+        if (GameManager.instance.gameState != GameState.Start) return;
+        GameManager.instance.ChangeGameState(GameState.Selection);
         descriptionText.gameObject.SetActive(false);
         foreach (AllyBulletData bullet in playerBulletsTypes)
         {
@@ -28,5 +36,12 @@ public class TurnBasedManager : MonoBehaviour
             btn.button.onClick.AddListener(() => { TurnBasedSystem.SetActive(false); GameManager.instance.ChangeGameState(GameState.Combat); });
         }
         GameManager.instance.ChangeGameState(GameState.Selection);
+    }
+
+    public void OnActButton()
+    {
+        if (GameManager.instance.gameState != GameState.Start) return;
+        GameManager.instance.ChangeGameState(GameState.Selection);
+        TypeWriter.instance.ShowDialogue(dialogue, descriptionText);
     }
 }
