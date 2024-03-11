@@ -565,15 +565,15 @@ MonoBehaviour:
   shotGun:
     attackRange: 5
     fireRate: 2
-    bulletPrefab: {fileID: 0}
-    attackTime: 0
+    bulletPrefab: {fileID: 4018592179360662229, guid: 3a43810b45cba5d4391d78e55c05eee3, type: 3}
+    attackTime: 3
   machineGun:
     attackRange: 8
     fireRate: 0.5
-    bulletPrefab: {fileID: 4018592179360662229, guid: 28f99388a222ddc4db1764dd552eb606, type: 3}
+    bulletPrefab: {fileID: 4018592179360662229, guid: 3a43810b45cba5d4391d78e55c05eee3, type: 3}
     attackTime: 10
   firePosition: {fileID: 2049681780}
-  currentState: 2
+  currentState: 0
 --- !u!212 &614492918
 SpriteRenderer:
   m_ObjectHideFlags: 0

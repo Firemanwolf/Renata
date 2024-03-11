@@ -21,7 +21,7 @@ public class TurnBasedManager : MonoBehaviour
 
     private void Update()
     {
-        if (TypeWriter.instance.finishedTyping) { TurnBasedSystem.SetActive(false); GameManager.instance.ChangeGameState(GameState.Combat); }
+        //if (TypeWriter.instance.finishedTyping) { TurnBasedSystem.SetActive(false); GameManager.instance.ChangeGameState(GameState.Combat); }
         if (GameManager.instance.gameState == GameState.Start) TurnBasedSystem.SetActive(true);
     }
 
@@ -34,7 +34,14 @@ public class TurnBasedManager : MonoBehaviour
         {
             BulletButton btn = Instantiate<BulletButton>(BulletButtonPrefab, itemGroup);
             btn.SetData(bullet);
-            btn.button.onClick.AddListener(() => { TurnBasedSystem.SetActive(false); GameManager.instance.ChangeGameState(GameState.Combat); });
+            btn.button.onClick.AddListener(() => { 
+                TurnBasedSystem.SetActive(false); 
+                GameManager.instance.ChangeGameState(GameState.Combat);
+                for (int i = 0; i < itemGroup.childCount; i++)
+                {
+                    Destroy(itemGroup.GetChild(i).gameObject);
+                }
+            });
         }
         GameManager.instance.ChangeGameState(GameState.Selection);
     }

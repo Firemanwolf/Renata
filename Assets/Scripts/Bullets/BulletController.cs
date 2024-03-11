@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Item
 {
@@ -11,6 +12,8 @@ namespace Item
         [SerializeField] protected bool Destroyable;
         private Rigidbody2D rb;
         public SpriteRenderer itemArt;
+
+        public UnityAction lifeEndEvent;
 
         private void Awake()
         {
@@ -47,6 +50,7 @@ namespace Item
                 rb.MovePosition(position);
                 yield return null;
             }
+            lifeEndEvent?.Invoke();
             if (Destroyable) Destroy(this.gameObject);
         }
 
@@ -56,6 +60,11 @@ namespace Item
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void OnDestroy()
+        {
+            lifeEndEvent?.Invoke();
         }
     }
 }
