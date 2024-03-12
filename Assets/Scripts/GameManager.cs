@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public GameState gameState { get; private set; }
     public static GameManager instance { get; private set; }
 
+    [SerializeField] private GameObject LosePage;
+    [SerializeField] private GameObject WinPage;
+
     private void Awake()
     {
         if(instance == null)
@@ -25,8 +28,13 @@ public class GameManager : MonoBehaviour
         gameState = newState;
     }
 
-    // Update is called once per frame
-    void Update()
+   public void OnGameLost()
     {
+        LosePage.SetActive(true);
+    }
+
+    public void OnGameWon()
+    {
+        WinPage.SetActive(true);
     }
 }

@@ -8,7 +8,9 @@ namespace Item
     {
         protected override void OnCollisionEnter2D(Collision2D collision)
         {
+            Debug.Log("working:" + collision);
             base.OnCollisionEnter2D(collision);
+            if(collision.transform.CompareTag("weakpoint"))
             Destroy(gameObject);
         }
     }

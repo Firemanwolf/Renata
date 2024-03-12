@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (GameManager.instance.gameState != GameState.Combat) return;
-        if (health < 0) Destroy(this.gameObject);
+        if (health <= 0) Destroy(this.gameObject);
         Movement();
     }
 
@@ -82,5 +82,10 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = 0;
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.instance.OnGameLost();
     }
 }

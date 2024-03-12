@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 831063278424234880}
   - component: {fileID: 1672605853755030987}
   - component: {fileID: 2896742734497061891}
-  - component: {fileID: 4018592179360662229}
+  - component: {fileID: 5350626246983985484}
   m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: Untagged
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
---- !u!114 &4018592179360662229
+--- !u!114 &5350626246983985484
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,9 +130,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4536304063770130460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3253ce51fac486945adee882b0bfb24b, type: 3}
+  m_Script: {fileID: 11500000, guid: a9c85c797f4cca440aeef91f6ce704d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: fcd10209e56a58c4dbaaab424357b152, type: 2}
-  Destroyable: 1
   itemArt: {fileID: 0}
+  lifeEndEvent:
+    m_PersistentCalls:
+      m_Calls: []

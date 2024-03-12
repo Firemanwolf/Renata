@@ -68,7 +68,7 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (GameManager.instance.gameState != GameState.Combat) return;
+        if (GameManager.instance.gameState != GameState.Combat || GameManager.instance.gameState == GameState.Lost || GameManager.instance.gameState == GameState.Win) return;
         switch (currentState)
         {
             case AttackState.Shotgun:

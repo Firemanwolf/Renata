@@ -23,6 +23,11 @@ public class TurnBasedManager : MonoBehaviour
     {
         //if (TypeWriter.instance.finishedTyping) { TurnBasedSystem.SetActive(false); GameManager.instance.ChangeGameState(GameState.Combat); }
         if (GameManager.instance.gameState == GameState.Start) TurnBasedSystem.SetActive(true);
+        if (TypeWriter.instance.finishedTyping)
+        {
+            TurnBasedSystem.SetActive(false);
+            GameManager.instance.ChangeGameState(GameState.Combat);
+        }
     }
 
     public void OnAttackButton()
