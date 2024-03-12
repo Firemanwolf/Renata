@@ -563,11 +563,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotGun:
+    combatState: 1
     attackRange: 5
     fireRate: 2
     bulletPrefab: {fileID: 4018592179360662229, guid: 3a43810b45cba5d4391d78e55c05eee3, type: 3}
     attackTime: 3
   machineGun:
+    combatState: 2
     attackRange: 8
     fireRate: 0.5
     bulletPrefab: {fileID: 4018592179360662229, guid: 3a43810b45cba5d4391d78e55c05eee3, type: 3}
@@ -1179,7 +1181,7 @@ GameObject:
   - component: {fileID: 861502424}
   - component: {fileID: 861502423}
   - component: {fileID: 861502425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Asset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1462,7 +1464,7 @@ GameObject:
   - component: {fileID: 1392503577}
   - component: {fileID: 1392503576}
   - component: {fileID: 1392503575}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1640,7 +1642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1550400583}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulletPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1747,7 +1749,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1726588881}
   - component: {fileID: 1726588882}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BulletPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

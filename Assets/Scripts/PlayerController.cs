@@ -12,6 +12,17 @@ public class PlayerController : MonoBehaviour
     private float delay;
     private CircleCollider2D circleCollider;
     [SerializeField] private float health = 100;
+    public float Health
+    {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            health = Math.Clamp(value, 0, 100);
+        }
+    }
     public static Transform playerPosition;
 
     [Header("Test Only")]

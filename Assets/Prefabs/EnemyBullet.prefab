@@ -134,5 +134,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: fcd10209e56a58c4dbaaab424357b152, type: 2}
-  Destroyable: 1
   itemArt: {fileID: 0}
+  lifeEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4018592179360662229}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

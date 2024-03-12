@@ -9,18 +9,17 @@ namespace Item
     {
         public BulletData data;
         protected float timer;
-        [SerializeField] protected bool Destroyable;
         private Rigidbody2D rb;
         public SpriteRenderer itemArt;
 
-        public UnityAction lifeEndEvent;
+        public UnityEvent lifeEndEvent;
 
-        private void Awake()
+        protected virtual void Awake()
         {
             itemArt = GetComponent<SpriteRenderer>();
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             Init();
         }
@@ -51,20 +50,14 @@ namespace Item
                 yield return null;
             }
             lifeEndEvent?.Invoke();
-            if (Destroyable) Destroy(this.gameObject);
         }
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
-            if (Destroyable && collision.gameObject.layer == 6)
+            if (collision.gameObject.layer == 6)
             {
-                Destroy(gameObject);
+                lifeEndEvent?.Invoke();
             }
-        }
-
-        private void OnDestroy()
-        {
-            lifeEndEvent?.Invoke();
         }
     }
 }

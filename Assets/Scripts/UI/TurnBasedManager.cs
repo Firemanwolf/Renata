@@ -8,7 +8,7 @@ public class TurnBasedManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] GameObject TurnBasedSystem;
-    [SerializeField] AllyBulletData[] playerBulletsTypes;
+    [SerializeField] BulletData[] playerBulletsTypes;
     [SerializeField] BulletButton BulletButtonPrefab;
     [SerializeField] DialogueObject dialogue;
 
@@ -30,7 +30,7 @@ public class TurnBasedManager : MonoBehaviour
         if (GameManager.instance.gameState != GameState.Start) return;
         GameManager.instance.ChangeGameState(GameState.Selection);
         descriptionText.gameObject.SetActive(false);
-        foreach (AllyBulletData bullet in playerBulletsTypes)
+        foreach (BulletData bullet in playerBulletsTypes)
         {
             BulletButton btn = Instantiate<BulletButton>(BulletButtonPrefab, itemGroup);
             btn.SetData(bullet);

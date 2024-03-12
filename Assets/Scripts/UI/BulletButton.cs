@@ -6,7 +6,7 @@ using TMPro;
 
 public class BulletButton : MonoBehaviour
 {
-    AllyBulletData bulletData;
+    BulletData bulletData;
     [HideInInspector]public Button button;
     TextMeshProUGUI text;
 
@@ -16,7 +16,7 @@ public class BulletButton : MonoBehaviour
         text = GetComponent<TextMeshProUGUI>();
     }
 
-    public void SetData(AllyBulletData data)
+    public void SetData(BulletData data)
     {
         bulletData = data;
         text.text = "* " + data.GetName();

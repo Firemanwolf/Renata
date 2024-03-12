@@ -42,7 +42,7 @@ public class PlayerBulletPivot: MonoBehaviour
         else coolDown -= Time.deltaTime;
     }
 
-    public void LoadBullet(AllyBulletData bulletData)
+    public void LoadBullet(BulletData bulletData)
     {
         bulletPrefab.data = bulletData;
     }

@@ -11,8 +11,9 @@ public class BulletData : ScriptableObject
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
     [SerializeField] protected Sprite bulletArt;
-
-    public virtual float GetStat(BulletStat bulletStat )
+    [SerializeField] protected float reloadRate;
+    [SerializeField] [Range(0.01f, 1f)] protected float mass;
+    public  float GetStat(BulletStat bulletStat)
     {
         switch (bulletStat)
         {
@@ -22,6 +23,10 @@ public class BulletData : ScriptableObject
                 return speed;
             case BulletStat.Damage:
                 return damage;
+            case BulletStat.ReloadRate:
+                return reloadRate;
+            case BulletStat.Mass:
+                return mass;
         }
         return 0;
     }
