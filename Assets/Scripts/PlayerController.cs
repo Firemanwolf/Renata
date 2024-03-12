@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour
             health = Math.Clamp(value, 0, 100);
         }
     }
-    public static Transform playerPosition;
 
     [Header("Test Only")]
     [SerializeField] private float trust;
@@ -38,7 +37,6 @@ public class PlayerController : MonoBehaviour
         delay = Mathf.Lerp(1f, Time.deltaTime, trust);
         mass = rb.mass;
         circleCollider = GetComponent<CircleCollider2D>();
-        playerPosition = transform;
     }
 
     private void Update()

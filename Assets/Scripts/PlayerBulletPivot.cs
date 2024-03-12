@@ -12,6 +12,7 @@ public class PlayerBulletPivot: MonoBehaviour
     [SerializeField] private BulletController bulletPrefab;
     private BulletController loadedBullet;
     private float coolDown;
+    public bool canFire;
 
     public static PlayerBulletPivot instance { get; private set; }
 
@@ -35,7 +36,7 @@ public class PlayerBulletPivot: MonoBehaviour
         if (GameManager.instance.gameState != GameState.Combat) return;
         Vector3 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
         RotateBullet(mousePos);
-        if (coolDown <= 0)
+        if (coolDown <= 0 && canFire)
         {
             Fire();
         }
@@ -51,7 +52,7 @@ public class PlayerBulletPivot: MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            loadedBullet = Instantiate<BulletController>(bulletPrefab, bulletPos.position, Quaternion.identity, transform);
+            loadedBullet = Instantiate<BulletController>(bulletPrefab, bulletPos.position, transform.rotation, transform);
             loadedBullet.transform.rotation = transform.rotation;
             player.MassIncrement(loadedBullet.data.GetStat(BulletStat.Mass));
         }

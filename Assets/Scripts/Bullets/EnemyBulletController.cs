@@ -20,6 +20,8 @@ namespace Item
             {
                 PlayerController player = collision.transform.GetComponent<PlayerController>();
                 Damage(player);
+                lifeEndEvent?.Invoke();
+                Destroy(gameObject);
             }
         }
     }

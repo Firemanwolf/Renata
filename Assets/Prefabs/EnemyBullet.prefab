@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 831063278424234880}
   - component: {fileID: 1672605853755030987}
   - component: {fileID: 2896742734497061891}
-  - component: {fileID: 4018592179360662229}
+  - component: {fileID: -8443579724539176681}
   m_Layer: 0
   m_Name: EnemyBullet
   m_TagString: Untagged
@@ -121,7 +121,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
---- !u!114 &4018592179360662229
+--- !u!114 &-8443579724539176681
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,15 +130,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4536304063770130460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3253ce51fac486945adee882b0bfb24b, type: 3}
+  m_Script: {fileID: 11500000, guid: 07f7e90271113aa4b8b9977ec20df984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: fcd10209e56a58c4dbaaab424357b152, type: 2}
+  data: {fileID: 11400000, guid: fa847bcbce1a3564bbd6e67af3d2169c, type: 2}
   itemArt: {fileID: 0}
   lifeEndEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4018592179360662229}
+      - m_Target: {fileID: 4536304063770130460}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 0

@@ -41,6 +41,7 @@ namespace Item
             rb = gameObject.AddComponent<Rigidbody2D>();
             rb.angularDrag = 0;
             rb.gravityScale = 0;
+            rb.freezeRotation = true;
             while (timer < data.GetStat(BulletStat.Life))
             {
                 timer += Time.fixedDeltaTime;
@@ -50,12 +51,14 @@ namespace Item
                 yield return null;
             }
             lifeEndEvent?.Invoke();
+            Destroy(gameObject);
         }
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.layer == 6)
             {
+                Destroy(gameObject);
                 lifeEndEvent?.Invoke();
             }
         }

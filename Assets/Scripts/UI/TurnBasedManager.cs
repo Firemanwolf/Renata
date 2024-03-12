@@ -28,6 +28,7 @@ public class TurnBasedManager : MonoBehaviour
     public void OnAttackButton()
     {
         if (GameManager.instance.gameState != GameState.Start) return;
+        PlayerBulletPivot.instance.canFire = true;
         GameManager.instance.ChangeGameState(GameState.Selection);
         descriptionText.gameObject.SetActive(false);
         foreach (BulletData bullet in playerBulletsTypes)
@@ -51,5 +52,6 @@ public class TurnBasedManager : MonoBehaviour
         if (GameManager.instance.gameState != GameState.Start) return;
         GameManager.instance.ChangeGameState(GameState.Selection);
         TypeWriter.instance.ShowDialogue(dialogue, descriptionText);
+        PlayerBulletPivot.instance.canFire = false;
     }
 }

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletName: Shell
   life: 3
-  speed: 15
+  speed: 30
   damage: 40
-  bulletArt: {fileID: 0}
+  bulletArt: {fileID: 776506804, guid: 2113ec3daa8e8b342a0bb1e12d12d74a, type: 3}
   reloadRate: 1
   mass: 0
