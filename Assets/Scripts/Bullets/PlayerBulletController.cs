@@ -10,7 +10,7 @@ namespace Item
         {
             Debug.Log("working:" + collision);
             base.OnCollisionEnter2D(collision);
-            if(collision.transform.CompareTag("weakpoint"))
+            if(!collision.transform.CompareTag("Player"))
             Destroy(gameObject);
         }
     }

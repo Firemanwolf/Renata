@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+
+public enum Buff {Speed};
 public class PlayerController : MonoBehaviour
 {
     private float mass;
@@ -12,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private float delay;
     private CircleCollider2D circleCollider;
     [SerializeField] private float health = 100;
+    public List<Buff> currentBuffs = new List<Buff>();
     public float Health
     {
         get
@@ -42,8 +45,23 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         if (GameManager.instance.gameState != GameState.Combat) return;
-        if (health <= 0) Destroy(this.gameObject);
+        if (health <= 0) 
+        {
+            GameManager.instance.OnGameLost();
+            Destroy(this.gameObject);
+            GameManager.instance.ChangeGameState(GameState.Lost);
+        } 
         Movement();
+        if(currentBuffs != null || currentBuffs.Count != 0)
+        foreach (var buff in currentBuffs)
+        {
+            switch (buff)
+            {
+                case Buff.Speed:
+                    moveSpeed = 15;
+                    break;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -54,7 +72,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Vector2 position = rb.position;
-        position += velocity * Time.fixedDeltaTime;
+        position += velocity / mass * Time.fixedDeltaTime;
         rb.MovePosition(position);
     }
 
@@ -68,8 +86,8 @@ public class PlayerController : MonoBehaviour
         LayerMask targetlayer = LayerMask.GetMask("Wall");
         float xInputAxis = Input.GetAxis("Horizontal");
         float yInputAxis = Input.GetAxis("Vertical");
-        velocity.x = Mathf.MoveTowards(velocity.x, xInputAxis * moveSpeed/mass, moveSpeed * Time.deltaTime/delay);
-        velocity.y = Mathf.MoveTowards(velocity.y, yInputAxis * moveSpeed/mass, moveSpeed * Time.deltaTime/delay);
+        velocity.x = Mathf.MoveTowards(velocity.x, xInputAxis * moveSpeed, moveSpeed * Time.deltaTime/delay);
+        velocity.y = Mathf.MoveTowards(velocity.y, yInputAxis * moveSpeed, moveSpeed * Time.deltaTime/delay);
         anim.SetBool("IsWalkingX", Mathf.Abs(xInputAxis) > 0.1);
         anim.SetBool("IsWalkingY", Mathf.Abs(yInputAxis) > 0.1);
         anim.SetFloat("VelocityX", velocity.x);
@@ -82,10 +100,5 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = 0;
         }
-    }
-
-    private void OnDestroy()
-    {
-        GameManager.instance.OnGameLost();
     }
 }

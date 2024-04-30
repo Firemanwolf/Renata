@@ -18,4 +18,4 @@ MonoBehaviour:
   damage: 0
   bulletArt: {fileID: 1588142970, guid: 2113ec3daa8e8b342a0bb1e12d12d74a, type: 3}
   reloadRate: 2
-  mass: 0.1
+  mass: 0.278

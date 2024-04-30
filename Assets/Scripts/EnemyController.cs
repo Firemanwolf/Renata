@@ -38,9 +38,13 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private float speed;
     [SerializeField] private float nextWayPointDistance = 3f;
+    [SerializeField] private LayerMask targetLayer;
     Path path;
     int currentWayPoint;
     bool reachedEndOfPath = false;
+
+    private float pathFindCD = .5f;
+    private float pathfindingTimer;
 
     Seeker seeker;
     Rigidbody2D rb;
@@ -57,22 +61,27 @@ public class EnemyController : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-
-        InvokeRepeating("UpdatePath", 0f, .5f);
     }
 
     void UpdatePath()
     {
+
         if(seeker.IsDone())seeker.StartPath(rb.position, player.position, OnPathComplete);
     }
 
     private void FixedUpdate()
     {
         if (GameManager.instance.gameState != GameState.Combat || GameManager.instance.gameState == GameState.Lost || GameManager.instance.gameState == GameState.Win) return;
+        if (pathfindingTimer > pathFindCD)
+        {
+            pathfindingTimer = 0;
+            UpdatePath();
+        }
+        else pathfindingTimer += Time.fixedDeltaTime;
         switch (currentState)
         {
             case AttackState.Shotgun:
-                if (Physics2D.OverlapCircle(rb.position, currentStats.attackRange, 7))
+                if (Physics2D.OverlapCircle(rb.position, currentStats.attackRange, targetLayer)) 
                 {
                     Vector3 distanceVector = -transform.position + player.position;
                     float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
@@ -93,6 +102,7 @@ public class EnemyController : MonoBehaviour
                     if (bullets.Count == 0)
                     {
                         GameManager.instance.ChangeGameState(GameState.Start);
+                        player.GetComponent<PlayerController>().currentBuffs.Clear();
                         currentState = AttackState.Idle;
                     }
                     return;
@@ -105,7 +115,8 @@ public class EnemyController : MonoBehaviour
                 break;
             case AttackState.Idle:
                 //transform.position = spawnPos.position;
-                float nextAttack = UnityEngine.Random.value;
+                //float nextAttack = UnityEngine.Random.value;
+                float nextAttack = 1f;
                 currentStats = nextAttack < 0.5f ? machineGun : shotGun;
                 CombatInit();
                 return;
@@ -133,6 +144,7 @@ public class EnemyController : MonoBehaviour
 
     void OnPathComplete(Path p)
     {
+        Debug.Log("activated");
         if (!p.error)
         {
             path = p;
@@ -152,14 +164,20 @@ public class EnemyController : MonoBehaviour
         else reachedEndOfPath = false;
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 force = direction * speed* Time.deltaTime;
 
-        rb.AddForce(force);
+        Debug.Log("direction: " + direction);
+        Debug.Log("force: "+ force * rb.mass);
+        Debug.Log("position: " + rb.position);
+        Debug.Log("path positon:" + (Vector2)path.vectorPath[currentWayPoint]);
+
+        rb.AddForce(force*rb.mass);
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
 
         if(distance < nextWayPointDistance)
         {
+            Debug.Log("index: " + currentWayPoint);
             currentWayPoint++;
         }
         return;
@@ -167,7 +185,7 @@ public class EnemyController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, 5);
+        Gizmos.DrawWireSphere(transform.position, currentStats.attackRange);
     }
 
 }

@@ -7,7 +7,7 @@ public class PlayerBulletPivot: MonoBehaviour
 {
     [SerializeField] private float massScale;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] PlayerController player;
+    [SerializeField] public PlayerController player;
     [SerializeField] private Transform bulletPos;
     [SerializeField] private BulletController bulletPrefab;
     private BulletController loadedBullet;

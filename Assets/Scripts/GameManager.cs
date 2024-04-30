@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject LosePage;
     [SerializeField] private GameObject WinPage;
 
+    public List<ItemData> itemsList = new List<ItemData>();
+
     private void Awake()
     {
         if(instance == null)
