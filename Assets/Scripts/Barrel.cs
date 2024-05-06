@@ -27,6 +27,10 @@ public class Barrel : MonoBehaviour
                     player.Health -= bombDamage;
                 }
                 else if (blownup.CompareTag("weakpoint")) GameManager.instance.OnGameWon();
+            }else if(enemy.data.GetName() == "Machine Gun")
+            {
+                enemy.lifeEndEvent?.Invoke();
+                Destroy(enemy.gameObject);
             }
         }
     }

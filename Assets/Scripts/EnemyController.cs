@@ -116,7 +116,7 @@ public class EnemyController : MonoBehaviour
             case AttackState.Idle:
                 //transform.position = spawnPos.position;
                 //float nextAttack = UnityEngine.Random.value;
-                float nextAttack = 1f;
+                float nextAttack = UnityEngine.Random.Range(0,1);
                 currentStats = nextAttack < 0.5f ? machineGun : shotGun;
                 CombatInit();
                 return;
