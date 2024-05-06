@@ -964,7 +964,7 @@ MonoBehaviour:
   firePosition: {fileID: 2049681780}
   spawnPos: {fileID: 0}
   currentState: 0
-  player: {fileID: 1392503578}
+  player: {fileID: 1392503577}
   speed: 1750
   nextWayPointDistance: 3
   targetLayer:

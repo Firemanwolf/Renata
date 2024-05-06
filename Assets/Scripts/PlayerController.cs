@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     private float delay;
     private CircleCollider2D circleCollider;
     [SerializeField] private float health = 100;
-    public List<Buff> currentBuffs = new List<Buff>();
+    [HideInInspector]public List<Buff> currentBuffs = new List<Buff>();
+    float buffSpeed;
     public float Health
     {
         get
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        buffSpeed = 1;
         if (GameManager.instance.gameState != GameState.Combat) return;
         if (health <= 0) 
         {
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour
             switch (buff)
             {
                 case Buff.Speed:
-                    moveSpeed = 15;
+                    buffSpeed = 2f;
                     break;
             }
         }
@@ -72,7 +74,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         Vector2 position = rb.position;
-        position += velocity / mass * Time.fixedDeltaTime;
+        position += velocity / mass * Time.fixedDeltaTime*buffSpeed;
         rb.MovePosition(position);
     }
 

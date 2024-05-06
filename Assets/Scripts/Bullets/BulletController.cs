@@ -56,7 +56,7 @@ namespace Item
 
         protected virtual void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.layer == 6 || collision.gameObject.layer == 8)
+            if (collision.gameObject.layer == 6 || collision.gameObject.layer == 8 || collision.transform.GetComponent<BulletController>()!=null)
             {
                 lifeEndEvent?.Invoke();
                 Destroy(gameObject);

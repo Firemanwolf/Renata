@@ -28,6 +28,7 @@ public class TurnBasedManager : MonoBehaviour
         {
             TurnBasedSystem.SetActive(false);
             GameManager.instance.ChangeGameState(GameState.Combat);
+            TypeWriter.instance.finishedTyping = false;
         }
     }
 
@@ -63,7 +64,8 @@ public class TurnBasedManager : MonoBehaviour
 
     public void OnItemButton()
     {
-        if (GameManager.instance.gameState != GameState.Start) return;  
+        if (GameManager.instance.gameState != GameState.Start) return;
+        PlayerBulletPivot.instance.canFire = false;
         GameManager.instance.ChangeGameState(GameState.Selection);
         if (GameManager.instance.itemsList.Count == 0 || GameManager.instance.itemsList == null)
         {

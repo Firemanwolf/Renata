@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]AttackState currentState;
 
     [Header("Enemy AI")]
-    [SerializeField] private Transform player;
+    [SerializeField] private PlayerController player;
     [SerializeField] private float speed;
     [SerializeField] private float nextWayPointDistance = 3f;
     [SerializeField] private LayerMask targetLayer;
@@ -66,7 +66,7 @@ public class EnemyController : MonoBehaviour
     void UpdatePath()
     {
 
-        if(seeker.IsDone())seeker.StartPath(rb.position, player.position, OnPathComplete);
+        if(seeker.IsDone())seeker.StartPath(rb.position, player.transform.position, OnPathComplete);
     }
 
     private void FixedUpdate()
@@ -83,7 +83,7 @@ public class EnemyController : MonoBehaviour
             case AttackState.Shotgun:
                 if (Physics2D.OverlapCircle(rb.position, currentStats.attackRange, targetLayer)) 
                 {
-                    Vector3 distanceVector = -transform.position + player.position;
+                    Vector3 distanceVector = -transform.position + player.transform.position;
                     float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                     goto default;
@@ -102,7 +102,7 @@ public class EnemyController : MonoBehaviour
                     if (bullets.Count == 0)
                     {
                         GameManager.instance.ChangeGameState(GameState.Start);
-                        player.GetComponent<PlayerController>().currentBuffs.Clear();
+                        player.currentBuffs.Clear();
                         currentState = AttackState.Idle;
                     }
                     return;
@@ -116,7 +116,7 @@ public class EnemyController : MonoBehaviour
             case AttackState.Idle:
                 //transform.position = spawnPos.position;
                 //float nextAttack = UnityEngine.Random.value;
-                float nextAttack = UnityEngine.Random.Range(0,1);
+                float nextAttack = UnityEngine.Random.Range(0.0f,1.0f);
                 currentStats = nextAttack < 0.5f ? machineGun : shotGun;
                 CombatInit();
                 return;
