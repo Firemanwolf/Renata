@@ -2958,6 +2958,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BARREL (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2772852832534515546, guid: b3344605156e82147bfb8447673a1271, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7217218696471843952, guid: b3344605156e82147bfb8447673a1271, type: 3}
       propertyPath: m_LocalPosition.x
       value: -38.4
@@ -4385,14 +4389,6 @@ PrefabInstance:
     - target: {fileID: 2772852832534515546, guid: b3344605156e82147bfb8447673a1271, type: 3}
       propertyPath: m_Name
       value: BARREL
-      objectReference: {fileID: 0}
-    - target: {fileID: 6641256762675549367, guid: b3344605156e82147bfb8447673a1271, type: 3}
-      propertyPath: portion
-      value: 
-      objectReference: {fileID: 5089163295752571893, guid: db50b81afed3e7440817218552c76cf6, type: 3}
-    - target: {fileID: 6641256762675549367, guid: b3344605156e82147bfb8447673a1271, type: 3}
-      propertyPath: bombRadius
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7217218696471843952, guid: b3344605156e82147bfb8447673a1271, type: 3}
       propertyPath: m_LocalPosition.x

@@ -23,7 +23,6 @@ namespace Item
                 lifeEndEvent?.Invoke();
                 Destroy(gameObject);
             }
-            //if (collision.transform.CompareTag("enemy") || collision.transform.CompareTag("weakpoint")) return;
         }
     }
 }

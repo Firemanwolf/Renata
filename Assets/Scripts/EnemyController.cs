@@ -144,7 +144,6 @@ public class EnemyController : MonoBehaviour
 
     void OnPathComplete(Path p)
     {
-        Debug.Log("activated");
         if (!p.error)
         {
             path = p;
@@ -166,10 +165,10 @@ public class EnemyController : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
         Vector2 force = direction * speed* Time.deltaTime;
 
-        Debug.Log("direction: " + direction);
+/*        Debug.Log("direction: " + direction);
         Debug.Log("force: "+ force * rb.mass);
         Debug.Log("position: " + rb.position);
-        Debug.Log("path positon:" + (Vector2)path.vectorPath[currentWayPoint]);
+        Debug.Log("path positon:" + (Vector2)path.vectorPath[currentWayPoint]);*/
 
         rb.AddForce(force*rb.mass);
 

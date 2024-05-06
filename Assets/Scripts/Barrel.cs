@@ -11,18 +11,22 @@ public class Barrel : MonoBehaviour
     [SerializeField] private GameObject portion;
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.TryGetComponent<EnemyBulletController>( out EnemyBulletController enemy))
+        if(collision.transform.TryGetComponent( out EnemyBulletController enemy))
         {
             if(enemy.data.GetName() == "Shell")
             {
-               Collider2D blownup = Physics2D.OverlapCircle(transform.position, bombRadius, targetLayer);
-                if (blownup.TryGetComponent<PlayerController>(out PlayerController player))
+                Instantiate(portion, transform.position, Quaternion.identity);
+                enemy.lifeEndEvent?.Invoke();
+                Destroy(enemy.gameObject);
+                Destroy(gameObject);
+                Debug.Log("it's hit");
+                Collider2D blownup = Physics2D.OverlapCircle(transform.position, bombRadius, targetLayer);
+                Debug.Log("name: "+blownup.name);
+                if (blownup.TryGetComponent(out PlayerController player))
                 {
                     player.Health -= bombDamage;
                 }
                 else if (blownup.CompareTag("weakpoint")) GameManager.instance.OnGameWon();
-                Instantiate(portion, transform.position, Quaternion.identity);
-                Destroy(gameObject);
             }
         }
     }
